@@ -6,6 +6,8 @@ use App\Models\admin;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use App\Models\serviceConsumer;
+use App\Models\serviceProvider;
 
 class loginController extends Controller
 {
@@ -42,7 +44,15 @@ class loginController extends Controller
 
     Public function DashboardPage()
     {
-        return view('DashBoard');
+        $sc = serviceConsumer::all()->count();
+        $sp = serviceProvider::all()->count();
+        $sum = $sc + $sp;
+
+        $lastSc = serviceConsumer::latest()->take(5)->get();
+        $lastSp = serviceProvider::latest()->take(5)->get();
+
+        $data = compact('sc','sp','sum','lastSc','lastSp');
+        return view('DashBoard')->with($data);
     }
 
     Public function ManageServiceConsumerPage()

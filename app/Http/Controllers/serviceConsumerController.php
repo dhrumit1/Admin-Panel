@@ -10,10 +10,19 @@ class serviceConsumerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tabledata=serviceConsumer::all();
-        return view("ManageServiceConsumer",["tabledata"=>$tabledata]);
+        $search = $request['search'] ?? "";
+        if($search != '')
+        {
+            $tabledata=serviceConsumer::where("firstName","LIKE","$search%")->get();
+        }
+        else
+        {
+            $tabledata=serviceConsumer::all();
+        }
+        $data = compact('search');
+        return view("ManageServiceConsumer",["tabledata"=>$tabledata])->with($data);
     }
 
     /**

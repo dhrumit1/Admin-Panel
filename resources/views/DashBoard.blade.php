@@ -32,7 +32,7 @@
         <div class="box">
           <div class="right-side">
             <div class="box-topic">Total Users</div>
-            <div class="number">150</div>
+            <div class="number">{{$sum}}</div>
             <div class="indicator">
               <i class='bx bx-up-arrow-alt'></i>
               <span class="text">Up from yesterday</span>
@@ -43,7 +43,7 @@
         <div class="box">
           <div class="right-side">
             <div class="box-topic">Total Service Consumer</div>
-            <div class="number">110</div>
+            <div class="number">{{$sc}}</div>
             <div class="indicator">
               <i class='bx bx-up-arrow-alt'></i>
               <span class="text">Up from yesterday</span>
@@ -54,7 +54,7 @@
         <div class="box">
           <div class="right-side">
             <div class="box-topic">Total Service Provider</div>
-            <div class="number">40</div>
+            <div class="number">{{$sp}}</div>
             <div class="indicator">
               <i class='bx bx-up-arrow-alt'></i>
               <span class="text">Up from yesterday</span>
@@ -86,20 +86,15 @@
                 <th>gender</th>
                 <th>phoneNo</th>
             </tr>
+            @foreach($lastSc as $lS)
             <tr>
                 <td>1</td>
-                <td>Dhrumit</td>
-                <td>parmar</td>
-                <td>male</td>
-                <td>7878415540</td>
+                <td>{{$lS->firstName}}</td>
+                <td>{{$lS->lastName}}</td>
+                <td>{{$lS->gender}}</td>
+                <td>{{$lS->phoneNo}}</td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Dhrumit</td>
-                <td>parmar</td>
-                <td>male</td>
-                <td>7878415540</td>
-            </tr>
+            @endforeach
             </table>
         </div>
         <div class="dash-top-sales box">
@@ -112,20 +107,15 @@
                 <th>gender</th>
                 <th>phoneNo</th>
             </tr>
+            @foreach($lastSp as $lP)
             <tr>
                 <td>1</td>
-                <td>nikunj</td>
-                <td>viramgami</td>
-                <td>male</td>
-                <td>8871642889</td>
+                <td>{{$lP->firstName}}</td>
+                <td>{{$lP->lastName}}</td>
+                <td>{{$lP->gender}}</td>
+                <td>{{$lP->phoneNo}}</td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>nikunj</td>
-                <td>viramgami</td>
-                <td>male</td>
-                <td>8871642889</td>
-            </tr>
+            @endforeach
             </table>
         </div>
       </div>
