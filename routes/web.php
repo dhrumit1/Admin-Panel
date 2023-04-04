@@ -39,4 +39,5 @@ Route::get('/logout',[loginController::class,'logoutPage']);
 Route::resource("/serviceConsumer",serviceConsumerController::class);
 Route::resource("/serviceProvider",serviceProviderController::class);
 Route::resource("/admin",adminController::class);
+// Route::resource("/admin/store",adminController::class,'store');
 Route::resource("/service",serviceController::class);

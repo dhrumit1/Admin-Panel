@@ -33,7 +33,7 @@ class loginController extends Controller
         // return view('DashBoard');
         $admin = admin::where('Email',"=",$em)->first();
         if ($admin && $pas == $admin->Password){
-            return view('DashBoard');
+            return redirect('/dash');
         }
         else{
             return back()->withErrors([

@@ -78,8 +78,11 @@ form{
                     <!-- Profile picture help block-->
                     <div class="small font-italic text-muted mb-4">Upload new image</div>
                     <!-- Profile picture upload button-->
-                    <input class="form-control" type="file" name="uploadfile" value=""/>
-                    <button class="btn btn-primary" type="button">Upload</button>
+                    <form action="/admin" method = "POST">
+                        @csrf
+                        <input class="form-control" type="file" name="image" value=""/>
+                        <button class="btn btn-primary" type="submit" name = "submit">Upload</button>
+                    </form>
                 </div>
             </div>
         </div>

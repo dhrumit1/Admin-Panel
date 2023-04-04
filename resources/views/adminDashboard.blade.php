@@ -19,7 +19,7 @@
    .menu-content {
       display: none;
       position: absolute;
-      background-color:DodgerBlue;
+      background-color:#0d3073;
       min-width: 120px;
       z-index: 1;
       left: -100px;
@@ -59,7 +59,7 @@
           </a>
         </li>
         <li>
-          <a href="/admin/create">
+          <a href="/admin">
             <i class='bx bx-box' ></i>
             <span class="links_name">Edit Profile</span>
           </a>

@@ -12,7 +12,7 @@ class adminController extends Controller
      */
     public function index()
     {
-        //
+        return view('editProfile');
     }
 
     /**
@@ -20,7 +20,7 @@ class adminController extends Controller
      */
     public function create()
     {
-        return view('editProfile');
+        //
     }
 
     /**
@@ -28,7 +28,33 @@ class adminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    //     $admin = new admin();
+    //    if($request->hasfile('image'))
+    //    {
+    //         $file = $request->file('image');
+    //         $extension = $file->getClientOriginalExtension();
+    //         $filename = time() . '.' . $extension;
+    //         $file->move('uploads/highlights/',$filename);
+    //         $admin->image = $filename;
+    //    }
+    //    else
+    //    {
+    //     return $request;
+    //     $admin->image = '';
+    //    }
+    //    $admin->save();
+    //    return redirect()->back();
+
+        // Validate the request
+        $request->validate([
+            'image' => 'required|image|max:2048',
+        ]);
+
+        // Store the image
+        $path = $request->file('image')->store('public');
+
+        // Return the path to the stored image
+        return $path;
     }
 
     /**
