@@ -53,16 +53,18 @@
     </div>
       <ul class="nav-links">
         <li>
-          <a href="/dash" class="active">
+          <a href="/admin" class="active">
             <i class='bx bx-grid-alt' ></i>
             <span class="links_name">Dashboard</span>
           </a>
         </li>
         <li>
-          <a href="/admin">
-            <i class='bx bx-box' ></i>
+            <a href="{{route('admin.edit',1)}}">
+            <!-- <i class='bx bx-box' ></i> -->
+            <i class='bx bx-edit'></i>
             <span class="links_name">Edit Profile</span>
           </a>
+
         </li>
         <li>
           <a href="/service">
@@ -72,13 +74,15 @@
         </li>
         <li>
           <a href="/serviceConsumer">
-            <i class='bx bx-pie-chart-alt-2' ></i>
+            <!-- <i class='bx bx-pie-chart-alt-2' ></i> -->
+            <i class='bx bxs-user-detail'></i>
             <span class="links_name">Manage Service Consumer</span>
           </a>
         </li>
         <li>
           <a href="/serviceProvider">
-            <i class='bx bx-coin-stack' ></i>
+            <!-- <i class='bx bx-coin-stack' ></i> -->
+            <i class='bx bxs-user-detail'></i>
             <span class="links_name">Manage Service Provider</span>
           </a>
         </li>
@@ -131,7 +135,7 @@
           <i class='bx bx-search' ></i>
         </div>
         <div class="profile-details">
-            <span class="admin_name">Dhrumit Parmar</span>
+            <span class="admin_name"><h1>Dhrumit Parmar</h1></span>
             <i class='bx bx-chevron-down'></i>
             <div class="dropdown-menu">
               <img src="/image/profile.png" alt="" class="img">
@@ -174,12 +178,3 @@ sidebarBtn.onclick = function() {
 
 </body>
 </html>
-
-
-<!-- <div class="dropdown">
-              <div class="dropdown-options">
-                <a href="#">Dashboard</a>
-                <a href="#">Setting</a>
-                <a href="#">Logout</a>
-              </div>
-          </div> -->

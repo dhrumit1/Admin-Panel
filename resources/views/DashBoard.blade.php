@@ -27,6 +27,11 @@
 
 </style>
 @section('content')
+@if (session()->has('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
 <div class="home-content">
       <div class="overview-boxes">
         <div class="box">

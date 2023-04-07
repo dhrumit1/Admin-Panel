@@ -50,6 +50,7 @@
             <button class="button">Search</button>
         </form>
     </div>
+
     <div class="sales-boxes">
         <div class="recent-sales box">
             <div class="title">
@@ -86,10 +87,10 @@
                       <td>{{$data->pincode}}</td>
                       <td>{{$data->password}}</td>
                       <td colspan=2>
-                        <form action="{{url('/serviceConsumer')}}/{{$data->id}}" method="POST">
+                        <form action="{{url('/serviceConsumer')}}/{{$data->id}}" method="POST" id="delete-form">
                             @csrf
                             @method("Delete")
-                            <button class="delete-btn">Delete</button>
+                            <button class="delete-btn" onclick="confirmDelete(event)">Delete</button>
                         </form>
                         <a href="{{route('serviceConsumer.edit',$data->id)}}">
                             <button class="update-btn">Edit</button>
@@ -104,4 +105,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    function confirmDelete(event) {
+        event.preventDefault();
+        if (confirm("Are you sure you want to delete this data?")) {
+            document.getElementById('delete-form').submit();
+        }
+    }
+</script>
 @stop

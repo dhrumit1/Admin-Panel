@@ -189,17 +189,9 @@ form input[type="submit"]:hover{
         <div class="error error-txt">Password can't be blank</div>
       </div>
       <div class="pass-txt"><a href="#">Forgot password?</a></div>
-      <input type="submit" value="Login" id="myBtn" onclick="javascript:alert('Login Successfully')">
+      <input type="submit" value="Login">
     </form>
     <!-- <div class="sign-txt">Not yet member? <a href="#">Signup now</a></div> -->
   </div>
-    <script>
-    input.addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-    event.preventDefault();
-    document.getElementById("myBtn").click();
-    }
-    });
-    </script>
 </body>
 </html>

@@ -91,6 +91,7 @@ class serviceConsumerController extends Controller
     public function destroy(string $id)
     {
         $serviceConsumer=serviceConsumer::where("id",$id)->delete();
-        return redirect()->back();
+        // return redirect()->back();
+        return redirect()->back()->with('success', 'Data has been deleted successfully.');
     }
 }
