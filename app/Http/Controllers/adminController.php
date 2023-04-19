@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\admin;
+use App\Models\serviceConsumer;
+use App\Models\serviceProvider;
 
 class adminController extends Controller
 {
@@ -12,7 +14,24 @@ class adminController extends Controller
      */
     public function index()
     {
-        //
+        // return view('editProfile');
+        $adminSession = session()->get('email');
+        $adminData = admin::where('Email',"=",$adminSession)->first();
+        $adminName = $adminData->UserName;
+        $admin_id = $adminData->id;
+        session()->put('admin_id',$admin_id);
+        session()->put('UserName',$adminName);
+
+
+        $sc = serviceConsumer::all()->count();
+        $sp = serviceProvider::all()->count();
+        $sum = $sc + $sp;
+
+        $lastSc = serviceConsumer::latest()->take(5)->get();
+        $lastSp = serviceProvider::latest()->take(5)->get();
+
+        $data = compact('sc','sp','sum','lastSc','lastSp');
+        return view('DashBoard')->with($data);
     }
 
     /**
@@ -20,7 +39,7 @@ class adminController extends Controller
      */
     public function create()
     {
-        return view('editProfile');
+        //
     }
 
     /**
@@ -28,7 +47,7 @@ class adminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       //
     }
 
     /**
@@ -44,9 +63,10 @@ class adminController extends Controller
      */
     public function edit(string $id)
     {
-        // $admin = admin::find($id);
-        // $data = compact('admin');
-        // return view('editProfile')->with($data);
+        $admin = admin::find($id);
+        $data = compact('admin');
+        return view('editProfile')->with($data);
+
     }
 
     /**
@@ -54,7 +74,17 @@ class adminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // $image = $request->file('image');
+        // $imageName = $image->getClientOriginalName();
+        // $image->storeAs('public/images',$imageName);
+
+        $admin = admin::find($id);
+        $admin -> UserName = $request["U_userName"];
+        $admin -> Name = $request["U_name"];
+        $admin -> Mobile_No = $request["U_mobileNumber"];
+        $admin -> Email = $request["U_email"];
+        $admin -> save();
+        return redirect()->back();
     }
 
     /**

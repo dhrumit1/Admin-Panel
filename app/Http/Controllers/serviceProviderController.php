@@ -10,10 +10,19 @@ class serviceProviderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tabledata=serviceProvider::all();
-        return view("ManageServiceProvider",["tabledata"=>$tabledata]);
+        $search = $request['search'] ?? "";
+        if($search != '')
+        {
+            $tabledata=serviceProvider::where("firstName","LIKE","$search%")->get();
+        }
+        else
+        {
+            $tabledata=serviceProvider::all();
+        }
+        $data = compact('search');
+        return view("ManageServiceProvider",["tabledata"=>$tabledata])->with($data);
     }
 
     /**

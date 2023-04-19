@@ -28,15 +28,17 @@ use App\Http\Controllers\serviceController;
 
 Route::get('/',[loginController::class,'loginPage']);
 Route::get('/admindash',[loginController::class,'adminDashboardPage']);
-Route::get('/dash',[loginController::class,'DashboardPage']);
+// Route::get('/dash',[loginController::class,'DashboardPage']);
+Route::get('/users',[loginController::class,'UserPage']);
 // Route::get('/Consumer',[loginController::class,'ManageServiceConsumerPage']);
 // Route::get('/Provider',[loginController::class,'ManageServiceProviderPage']);
 Route::get('/logout',[loginController::class,'logoutPage']);
 // Route::get('/addSC',[loginController::class,'addSCPage']);
-// Route::get('/editProfile',[loginController::class,'editProfilePage']);
+// Route::get('/editProfile/{id}',[loginController::class,'editProfilePage']);
 
 //CURD operation
 Route::resource("/serviceConsumer",serviceConsumerController::class);
 Route::resource("/serviceProvider",serviceProviderController::class);
 Route::resource("/admin",adminController::class);
+// Route::resource("/admin/store",adminController::class,'store');
 Route::resource("/service",serviceController::class);

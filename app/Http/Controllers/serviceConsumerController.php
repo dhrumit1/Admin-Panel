@@ -10,10 +10,19 @@ class serviceConsumerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tabledata=serviceConsumer::all();
-        return view("ManageServiceConsumer",["tabledata"=>$tabledata]);
+        $search = $request['search'] ?? "";
+        if($search != '')
+        {
+            $tabledata=serviceConsumer::where("firstName","LIKE","$search%")->get();
+        }
+        else
+        {
+            $tabledata=serviceConsumer::all();
+        }
+        $data = compact('search');
+        return view("ManageServiceConsumer",["tabledata"=>$tabledata])->with($data);
     }
 
     /**
@@ -34,7 +43,7 @@ class serviceConsumerController extends Controller
         $sc ->lastName = $request->input('lnm');
         $sc ->email = $request->input('email');
         $sc ->phoneNo = $request->input('phnum');
-        $sc ->password = $request->input('pass');
+        $sc ->sc_password = $request->input('pass');
         $sc ->gender = $request->input('gender');
         $sc ->save();
         return redirect('/serviceConsumer');
@@ -73,7 +82,7 @@ class serviceConsumerController extends Controller
         $serviceConsumer -> City = $request["uscC"];
         $serviceConsumer -> pincode = $request["uscpc"];
         $serviceConsumer -> save();
-        return redirect('/serviceConsumer');
+        return redirect('/serviceConsumer')->with('success', 'Data has been updated successfully.');
     }
 
     /**
@@ -82,6 +91,7 @@ class serviceConsumerController extends Controller
     public function destroy(string $id)
     {
         $serviceConsumer=serviceConsumer::where("id",$id)->delete();
-        return redirect()->back();
+        // return redirect()->back();
+        return redirect()->back()->with('success', 'Data has been deleted successfully.');
     }
 }

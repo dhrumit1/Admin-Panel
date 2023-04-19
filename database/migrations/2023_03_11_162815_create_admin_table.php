@@ -20,7 +20,7 @@ class CreateAdminTable extends Migration
             $table->String ("Name",50);
             $table->String ("Email",50);
             $table->bigInteger ("Mobile_No")->length(11);
-            $table->String ("image",100)->nullable();
+            $table->mediumText ("image")->nullable();
             $table->timestamps();
         });
     }

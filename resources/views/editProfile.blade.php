@@ -1,132 +1,195 @@
 @extends('adminDashboard')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+
 <style>
-    .container-xl{
-        text-align: center;
-    }
-.img-account-profile {
-    height: 10rem;
-}
-.rounded-circle {
-    border-radius: 50% !important;
-}
-.card {
-    box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+.container{
+    position: relative;
+    padding-top: 105px;
 }
 
-form{
-    text-align: -webkit-center;
+.my-5 h3{
+    text-align: center;
 }
 
-.card-body{
-    text-align: -webkit-center;
+.my-4{
+    text-align: center;
 }
 
-.card .card-header {
-    font-weight: 500;
+.g-3{
+    text-align: center;
 }
-.card-header:first-child {
-    border-radius: 0.35rem 0.35rem 0 0;
+
+.g-4{
+    text-align: start;
 }
-.card-header {
-    padding: 1rem 1.35rem;
-    margin-bottom: 50px;
-    background-color: rgba(33, 40, 50, 0.03);
-    border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+
+.g-5{
+    text-align: start;
 }
-.form-control, .dataTable-input {
+
+.bg-secondary-soft {
+    background-color: rgba(208, 212, 217, 0.1) !important;
+}
+.rounded {
+    border-radius: 5px !important;
+}
+.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 1rem !important;
+}
+.px-4 {
+    padding-right: 1.5rem !important;
+    padding-left: 1.5rem !important;
+}
+
+.file-upload .square {
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    vertical-align: middle;
+    border: 1px solid #e5dfe4;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.text-secondary {
+    --bs-text-opacity: 1;
+    color: rgba(208, 212, 217, 0.5) !important;
+}
+.btn-success-soft {
+    padding: 5px;
+    color: #fff;
+    background-color: #28a745;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.btn-danger-soft {
+    padding: 5px;
+    color: #fff;
+    background-color: #dc3545;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.form-control {
     display: block;
-    width: 25%;
-    padding: 0.35rem 1.125rem;
-    font-size: 1.0rem;
+    width: 50%;
+    padding: 0.5rem 1rem;
+    font-size: 0.9375rem;
     font-weight: 400;
-    line-height: 1;
-    color: #69707a;
+    line-height: 1.5;
+    color: #29292e;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid #c5ccd6;
+    border: 1px solid #e5dfe4;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    border-radius: 0.35rem;
+    border-radius: 5px;
+    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
-.btn{
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    margin: 10px;
-    cursor: pointer;
-    border-radius: 5px;
+.gap-3{
+    text-align: center;
 }
 </style>
 @section('content')
-<form action="">
-<div class="container-xl px-4 mt-4">
-    <!-- Account page navigation-->
+<!-- <form action="#" method="post">
+@csrf
+@method('PUT') -->
+<div class="container">
+<div class="row">
+		<div class="col-12">
+			<!-- Page title -->
+			<div class="my-5">
+				<h3>Admin Profile</h3>
+			</div>
+			<!-- Form START -->
+			<form class="file-upload" action="{{route('admin.update',$admin->id)}}" method="post" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+				<div class="row mb-5 gx-5">
 
-    <hr class="mt-0 mb-4">
-    <div class="row">
-        <div class="col-xl-4">
-            <!-- Profile picture card-->
-            <div class="card mb-4 mb-xl-0">
-                <div class="card-header">Profile Picture</div>
-                <div class="card-body text-center">
-                    <!-- Profile picture image-->
-                    <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                    <!-- Profile picture help block-->
-                    <div class="small font-italic text-muted mb-4">Upload new image</div>
-                    <!-- Profile picture upload button-->
-                    <input class="form-control" type="file" name="uploadfile" value=""/>
-                    <button class="btn btn-primary" type="button">Upload</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-8">
-            <!-- Account details card-->
-            <div class="card mb-4">
-                <div class="card-header">Account Details</div>
-                <div class="card-body">
-                    <form>
-                        <!-- Form Group (username)-->
-                        <div class="mb-3">
-                            <label class="small mb-1" for="inputUsername">Username</label>
-                            <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username">
-                        </div>
-                        <!-- Form Row-->
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (first name)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputFirstName">First name</label>
-                                <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name">
-                            </div>
-                            <!-- Form Group (last name)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputLastName">Last name</label>
-                                <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name">
-                            </div>
-                        </div>
-                        <!-- Form Group (email address)-->
-                        <div class="mb-3">
-                            <label class="small mb-1" for="inputEmailAddress">Email</label>
-                            <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address">
-                        </div>
-                        <!-- Form Row-->
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (phone number)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputPhone">Phone number</label>
-                                <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number">
-                            </div>
-                        </div>
-                        <!-- Save changes button-->
-                        <button class="btn btn-primary" type="button">Save changes</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</form>
+					<!-- <div class="col-xxl-4">
+						<div class="bg-secondary-soft px-4 py-5 rounded">
+							<div class="row g-3">
+								<h4>Upload your profile photo</h4>
+								<div class="text-center">
+
+									<div class="square position-relative display-2 mb-3">
+										<i class="fas fa-fw fa-user position-absolute top-50 start-50 translate-middle text-secondary"></i>
+									</div>
+
+									<input type="file" id="customFile" name="file" hidden="">
+									<label class="btn btn-success-soft btn-block" for="customFile">Upload</label>
+									<button type="button" class="btn btn-danger-soft">Remove</button>
+								</div>
+							</div>
+						</div>
+					</div> -->
+					<!-- Contact detail -->
+					<div class="col-xxl-8 mb-5 mb-xxl-0">
+						<div class="bg-secondary-soft px-4 py-5 rounded">
+							<div class="row g-4">
+                            <h4 class="my-4">Change Details</h4>
+								<!-- First Name -->
+								<div class="col-md-6">
+									<label class="form-label">UserName *</label>
+									<input type="text" name="U_userName" class="form-control" value='{{$admin->UserName}}'>
+								</div>
+								<!-- Last name -->
+								<div class="col-md-6">
+									<label class="form-label">Name *</label>
+									<input type="text" name="U_name" class="form-control" value='{{$admin->Name}}'>
+								</div>
+								<!-- Mobile number -->
+								<div class="col-md-6">
+									<label class="form-label">Mobile number *</label>
+									<input type="text" name="U_mobileNumber" class="form-control" value='{{$admin->Mobile_No}}'>
+								</div>
+								<!-- Email -->
+								<div class="col-md-6">
+									<label for="inputEmail4" class="form-label">Email *</label>
+									<input type="email" name="U_email" class="form-control" value='{{$admin->Email}}'>
+								</div>
+							</div> <!-- Row END -->
+						</div>
+					</div>
+				</div> <!-- Row END -->
+
+				<!-- Social media detail -->
+				<!-- <div class="row mb-5 gx-5"> -->
+						<!-- change password -->
+					<!-- <div class="col-xxl-6">
+						<div class="bg-secondary-soft px-4 py-5 rounded">
+							<div class="row g-5">
+								<h4 class="my-4">Change Password</h4>
+								<div class="col-md-6">
+									<label for="exampleInputPassword1" class="form-label">Old password *</label>
+									<input type="password" class="form-control" id="exampleInputPassword1">
+								</div>
+								<div class="col-md-6">
+									<label for="exampleInputPassword2" class="form-label">New password *</label>
+									<input type="password" class="form-control" id="exampleInputPassword2">
+								</div>
+								<div class="col-md-12">
+									<label for="exampleInputPassword3" class="form-label">Confirm Password *</label>
+									<input type="password" class="form-control" id="exampleInputPassword3">
+								</div>
+							</div>
+						</div>
+					</div> -->
+				<!-- </div> -->
+				<!-- button -->
+				<div class="gap-3 d-md-flex justify-content-md-end text-center">
+					<!-- <button type="button" class="btn-success-soft">Delete profile</button> -->
+					<button type="button" class="btn-success-soft">Update profile</button>
+				</div>
+			</form> <!-- Form END -->
+		</div>
+	</div>
+	</div>
+<!-- </form> -->
 @stop

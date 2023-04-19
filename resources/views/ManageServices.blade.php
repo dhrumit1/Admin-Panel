@@ -22,7 +22,8 @@
                     <tr>
                       <td>{{$data->id}}</td>
                       <td>{{$data->service_name}}</td>
-                      <td>{{$data->service_img}}</td>
+                      <!-- <td>{{$data->service_img}}</td> -->
+                      <td><img src="{{asset('storage/images/'.$data->service_img)}}" alt=""></td>
                       <td>{{$data->description}}</td>
                       <td colspan=2>
                         <a href="{{route('service.edit',$data->id)}}">
