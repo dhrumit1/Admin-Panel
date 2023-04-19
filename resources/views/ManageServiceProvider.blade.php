@@ -70,7 +70,7 @@
                         <th>Area</th>
                         <th>City</th>
                         <th>pincode</th>
-                        <th>password</th>
+                        <!-- <th>password</th> -->
                         <th>Action</th>
                     </tr>
                     @foreach($tabledata as $data)
@@ -84,7 +84,7 @@
                       <td>{{$data->Area}}</td>
                       <td>{{$data->City}}</td>
                       <td>{{$data->pincode}}</td>
-                      <td>{{$data->password}}</td>
+                      <!-- <td>{{$data->password}}</td> -->
                       <td colspan=2>
                         <form action="{{url('/serviceProvider')}}/{{$data->id}}" method="POST">
                             @csrf

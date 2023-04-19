@@ -107,16 +107,16 @@ footer {
 	<main>
 		<section id="about">
 			<h2>About Us</h2>
-			<p>Insert information about your company and services provided here.</p>
+			<p>Here we can provide a service like Home maid services</p>
 		</section>
 
 		<section id="services">
 			<h2>Services</h2>
 			<ul>
-				<li>Regular Cleaning</li>
-				<li>Deep Cleaning</li>
-				<li>Move-in/Move-out Cleaning</li>
-				<li>Specialty Cleaning (e.g. Post-Construction, Event Clean-up)</li>
+				<li>Home Cleaning</li>
+				<li>Maid service</li>
+				<li>Laundary service</li>
+				<li>baby sitting</li>
 			</ul>
 		</section>
 

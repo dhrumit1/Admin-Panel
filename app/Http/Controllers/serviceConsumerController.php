@@ -43,7 +43,7 @@ class serviceConsumerController extends Controller
         $sc ->lastName = $request->input('lnm');
         $sc ->email = $request->input('email');
         $sc ->phoneNo = $request->input('phnum');
-        $sc ->password = $request->input('pass');
+        $sc ->sc_password = $request->input('pass');
         $sc ->gender = $request->input('gender');
         $sc ->save();
         return redirect('/serviceConsumer');
@@ -82,7 +82,7 @@ class serviceConsumerController extends Controller
         $serviceConsumer -> City = $request["uscC"];
         $serviceConsumer -> pincode = $request["uscpc"];
         $serviceConsumer -> save();
-        return redirect('/serviceConsumer');
+        return redirect('/serviceConsumer')->with('success', 'Data has been updated successfully.');
     }
 
     /**

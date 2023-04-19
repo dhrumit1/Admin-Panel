@@ -448,7 +448,7 @@ nav .profile-details i{
 /* table css */
 table {
     font-family: arial, sans-serif;
-    border-collapse: collapse;
+    border-collapse: unset;
     width: 50%;
     margin: auto;
   }
@@ -460,7 +460,7 @@ table {
 
   td, th {
     border: 1px solid #dddddd;
-    text-align: left;
+    text-align: center;
     padding: 8px;
   }
 

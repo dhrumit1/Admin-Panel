@@ -17,7 +17,10 @@ class adminController extends Controller
         // return view('editProfile');
         $adminSession = session()->get('email');
         $adminData = admin::where('Email',"=",$adminSession)->first();
-        $aid = $adminData->id;
+        $adminName = $adminData->UserName;
+        $admin_id = $adminData->id;
+        session()->put('admin_id',$admin_id);
+        session()->put('UserName',$adminName);
 
 
         $sc = serviceConsumer::all()->count();
@@ -27,7 +30,7 @@ class adminController extends Controller
         $lastSc = serviceConsumer::latest()->take(5)->get();
         $lastSp = serviceProvider::latest()->take(5)->get();
 
-        $data = compact('sc','sp','sum','lastSc','lastSp','aid');
+        $data = compact('sc','sp','sum','lastSc','lastSp');
         return view('DashBoard')->with($data);
     }
 
@@ -60,11 +63,10 @@ class adminController extends Controller
      */
     public function edit(string $id)
     {
-        // $admin = admin::find($id);
-        // echo "$admin";
-        // $data = compact('admin');
-        return view('editProfile');
-        // echo "$id";
+        $admin = admin::find($id);
+        $data = compact('admin');
+        return view('editProfile')->with($data);
+
     }
 
     /**
@@ -72,7 +74,17 @@ class adminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // $image = $request->file('image');
+        // $imageName = $image->getClientOriginalName();
+        // $image->storeAs('public/images',$imageName);
+
+        $admin = admin::find($id);
+        $admin -> UserName = $request["U_userName"];
+        $admin -> Name = $request["U_name"];
+        $admin -> Mobile_No = $request["U_mobileNumber"];
+        $admin -> Email = $request["U_email"];
+        $admin -> save();
+        return redirect()->back();
     }
 
     /**

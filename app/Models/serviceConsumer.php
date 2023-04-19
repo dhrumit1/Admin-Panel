@@ -10,5 +10,5 @@ class serviceConsumer extends Model
     use HasFactory;
     protected $table = "service_consumer";
     protected $primarykey = "SC_id";
-    protected $fillable = ["firstName","lastName","gender","phoneNo","email","password","Area","City","pincode"];
+    protected $fillable = ["firstName","lastName","gender","phoneNo","email","sc_password","Area","City","pincode"];
 }

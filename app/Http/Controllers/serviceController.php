@@ -55,9 +55,13 @@ class serviceController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $image = $request->file('image');
+        $imageName = $image->getClientOriginalName();
+        $image->storeAs('public/images',$imageName);
+
         $service = service::find($id);
         $service -> service_name = $request["usnm"];
-        $service -> service_img = $request["usimg"];
+        $service -> service_img = $imageName;
         $service -> description = $request["usdes"];
         $service -> save();
         return redirect('/service');
