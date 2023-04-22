@@ -2,46 +2,41 @@
 
 namespace App\Http\Controllers;
 // use Auth;
+use Illuminate\Support\Facades\Password;
 use App\Models\admin;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\serviceConsumer;
 use App\Models\serviceProvider;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class loginController extends Controller
 {
-    Public function loginPage()
+    public function loginPage()
     {
         return view('login');
     }
 
-    Public function adminDashboardPage(Request $request)
+    public function adminDashboardPage()
     {
-        $request->validate(["email"=>"required","password"=>"required"]);
-        $em=$request->input('email');
-        $pas=$request->input('password');
-        // echo "Email:".$em. "<br> password".$pas ;
-    //     if(Auth::attempt(['Email'=>$em,'Password'=>$pas]))
-    //    {
-    //         // return redirect('/admindash');
-    //         echo "ok";
-    //     }
-    //     else{
-    //         echo "not";
-    //     }
-        // return view('DashBoard');
-        $admin = admin::where('Email',"=",$em)->first();
-        if ($admin && $pas == $admin->Password){
-            session()->put('email',$em);
-            return redirect('/admin');
-        }
-        else{
-            return redirect('/users');
-        }
+        // $request->validate(["email"=>"required","password"=>"required"]);
+        // $em=$request->input('email');
+        // $pas=$request->input('password');
+
+        // $admin = admin::where('Email',"=",$em)->first();
+        // if ($admin && $pas == $admin->Password){
+        //     session()->put('email',$em);
+        //     return redirect('/admin');
+        // }
+        // else{
+        //     return redirect('/users');
+        // }
+        return redirect('/')->with('error', 'Please enter the valid username and password');
     }
 
-    Public function DashboardPage()
+    public function DashboardPage()
     {
         // $adminSession = session()->get('email');
         // $adminData = admin::where('Email',"=",$adminSession)->first();
@@ -60,29 +55,37 @@ class loginController extends Controller
         // echo "ok";
     }
 
-    Public function UserPage()
+    public function UserPage()
     {
         return view('users');
     }
 
-    Public function ManageServiceConsumerPage()
+    public function ManageServiceConsumerPage()
     {
         return view('ManageServiceConsumer');
     }
 
-    Public function ManageServiceProviderPage()
+    public function ManageServiceProviderPage()
     {
         return view('ManageServiceProvider');
     }
 
-    Public function logoutPage()
+    public function logoutPage()
     {
-        return view('login');
+        if (session()->has('admin_id')) {
+            session()->forget('admin_id');
+            return redirect('/');
+        }
     }
 
-    Public function addSCPage()
+    public function addSCPage()
     {
         return view('addSC');
+    }
+
+    public function forgotPasswordPage()
+    {
+        return view('forgot-password');
     }
 
     // Public function editProfilePage($id)
@@ -91,4 +94,38 @@ class loginController extends Controller
     //     echo "$ad->Email";
     //     return view('editProfile',['ad'=>$ad]);
     // }
+
+    public function sendResetLinkEmail(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $token = Str::random(40);
+
+        $data = ['token'=>$token];
+        $email['to'] = $request->email;
+
+        Mail::send('mail',$data, function($message) use ($email){
+            $message->to($email['to'])
+                    ->subject('Test email');
+        });
+
+        echo "ok";
+    }
+
+    public function showResetForm(Request $request, $token=null)
+    {
+        return view('resetPass')->with(
+        ['token' => $token, 'email' => $request->email]
+        );
+    }
+
+    public function updatePassword(Request $request)
+    {
+         echo "oh";
+    }
+
+    public function addAdmin(Request $request)
+    {
+        return view('Add-admin');
+    }
 }

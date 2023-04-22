@@ -15,7 +15,7 @@ class serviceConsumerController extends Controller
         $search = $request['search'] ?? "";
         if($search != '')
         {
-            $tabledata=serviceConsumer::where("firstName","LIKE","$search%")->get();
+            $tabledata=serviceConsumer::where("firstName","LIKE","$search%")->orwhere("phoneNo","LIKE","$search%")->get();
         }
         else
         {
@@ -92,6 +92,6 @@ class serviceConsumerController extends Controller
     {
         $serviceConsumer=serviceConsumer::where("id",$id)->delete();
         // return redirect()->back();
-        return redirect()->back()->with('success', 'Data has been deleted successfully.');
+        return redirect('/serviceConsumer')->with('success', 'Data has been deleted successfully.');
     }
 }

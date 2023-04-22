@@ -17,10 +17,10 @@ class adminController extends Controller
         // return view('editProfile');
         $adminSession = session()->get('email');
         $adminData = admin::where('Email',"=",$adminSession)->first();
-        $adminName = $adminData->UserName;
+        $adminName = $adminData->Name;
         $admin_id = $adminData->id;
         session()->put('admin_id',$admin_id);
-        session()->put('UserName',$adminName);
+        session()->put('Name',$adminName);
 
 
         $sc = serviceConsumer::all()->count();

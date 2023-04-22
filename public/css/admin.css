@@ -301,6 +301,7 @@ nav .profile-details i{
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  margin-inline-end: 225px;
 }
 .sales-boxes .box .button a{
   color: #fff;

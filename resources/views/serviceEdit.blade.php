@@ -1,15 +1,15 @@
 @extends('adminDashboard')
 <style>
-    form{
+    form {
         position: relative;
         padding-top: 104px;
     }
 
-    .h3{
+    .h3 {
         margin: 50px 0;
     }
 
-    .ser-input{
+    .ser-input {
         width: 50%;
         padding: 0.5rem 1rem;
         font-size: 0.9375rem;

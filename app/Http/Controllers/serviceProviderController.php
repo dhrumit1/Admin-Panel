@@ -15,7 +15,7 @@ class serviceProviderController extends Controller
         $search = $request['search'] ?? "";
         if($search != '')
         {
-            $tabledata=serviceProvider::where("firstName","LIKE","$search%")->get();
+            $tabledata=serviceProvider::where("firstName","LIKE","$search%")->orwhere("phoneNo","LIKE","$search%")->get();
         }
         else
         {
@@ -83,7 +83,7 @@ class serviceProviderController extends Controller
         $serviceProvider -> City = $request["uscC"];
         $serviceProvider -> pincode = $request["uscpc"];
         $serviceProvider -> save();
-        return redirect('/serviceProvider');
+        return redirect('/serviceProvider')->with('success', 'Data has been updated successfully.');
     }
 
     /**
@@ -92,6 +92,6 @@ class serviceProviderController extends Controller
     public function destroy(string $id)
     {
         $serviceProvider=serviceProvider::where("id",$id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Data has been deleted successfully.');
     }
 }

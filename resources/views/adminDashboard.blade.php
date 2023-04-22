@@ -19,7 +19,7 @@
     .menu-content {
         display: none;
         position: absolute;
-        background-color: #0d3073;
+        background-color: #0d3073a6;
         min-width: 120px;
         z-index: 1;
         left: -100px;
@@ -34,6 +34,7 @@
         font-size: 18px;
         font-weight: bold;
         border-bottom: 1px solid black;
+        border-radius: 12px;
     }
 
     .links:hover {
@@ -44,12 +45,17 @@
     .dropdown-menu:hover .menu-btn {
         background-color: #3e8e41;
     }
+
+    .image-size {
+        width: 300px;
+        height: 250px;
+    }
 </style>
 
 <body>
     <div class="sidebar">
         <div class="logo-details">
-            <i class=''></i>
+            <i class='bx bx-home'></i>
             <span class="logo_name">Maid4House</span>
         </div>
         <ul class="nav-links">
@@ -61,7 +67,6 @@
             </li>
             <li>
                 <a href="{{route('admin.edit',session()->get('admin_id'))}}">
-                    <!-- <i class='bx bx-box' ></i> -->
                     <i class='bx bx-edit'></i>
                     <span class="links_name">Edit Profile</span>
                 </a>
@@ -75,14 +80,12 @@
             </li>
             <li>
                 <a href="/serviceConsumer">
-                    <!-- <i class='bx bx-pie-chart-alt-2' ></i> -->
                     <i class='bx bxs-user-detail'></i>
                     <span class="links_name">Manage Service Consumer</span>
                 </a>
             </li>
             <li>
                 <a href="/serviceProvider">
-                    <!-- <i class='bx bx-coin-stack' ></i> -->
                     <i class='bx bxs-user-detail'></i>
                     <span class="links_name">Manage Service Provider</span>
                 </a>
@@ -94,29 +97,17 @@
                 </a>
             </li>
             <!-- <li>
-          <a href="#">
-            <i class='bx bx-user' ></i>
-            <span class="links_name">Complaint</span>
-          </a>
-        </li> -->
-            <!-- <li>
-          <a href="#">
-            <i class='bx bx-message' ></i>
-            <span class="links_name">Messages</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-heart' ></i>
-            <span class="links_name">Favrorites</span>
-          </a>
-        </li> -->
-            <!-- <li>
-          <a href="#">
-            <i class='bx bx-cog' ></i>
-            <span class="links_name">Setting</span>
-          </a>
-        </li> -->
+                <a href="#">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">Complaint</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Setting</span>
+                </a>
+            </li> -->
             <li class="log_out">
                 <a href="/logout">
                     <i class='bx bx-log-out'></i>
@@ -131,26 +122,29 @@
                 <i class='bx bx-menu sidebarBtn'></i>
                 <span class="dashboard">Dashboard</span>
             </div>
-            <div class="search-box">
+            <div class="name-details">
+                <img src="/image/Maid4House.png" alt="" class="image-size">
+            </div>
+            <!-- <div class="search-box">
                 <input type="text" placeholder="Search...">
                 <i class='bx bx-search'></i>
-            </div>
+            </div> -->
             <div class="profile-details">
                 <span class="admin_name">
                     <h1>
-                        @if (session()->has('UserName'))
-                            {{session()->get('UserName')}}
+                        @if (session()->has('Name'))
+                        {{session()->get('Name')}}
                         @else
-                            Guest
+                        Guest
                         @endif
-                        </h1>
+                    </h1>
                 </span>
                 <!-- <i class='bx bx-chevron-down'></i> -->
                 <div class="dropdown-menu">
-                    <img src="/image/profile.png" alt="" class="img">
+                    <img src="/image/profile1.png" alt="" class="img">
                     <div class="menu-content">
-                        <a class="links" href="/admin/create">Profile</a>
-                        <a class="links" href="#">Add Admin</a>
+                        <a class="links" href="{{route('admin.edit',session()->get('admin_id'))}}">Profile</a>
+                        <a class="links" href="/add-admin">Add Admin</a>
                         <a class="links" href="/logout">Logout</a>
                     </div>
                 </div>

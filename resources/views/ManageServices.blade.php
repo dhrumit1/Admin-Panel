@@ -12,28 +12,28 @@
             <div class="sales-details">
                 <table>
                     <tr>
-                      <th>No</th>
-                      <th>service_name</th>
-                      <th>service_img</th>
-                      <th>description</th>
-                      <th>Action</th>
+                        <th>No</th>
+                        <th>service_name</th>
+                        <th>service_img</th>
+                        <th>description</th>
+                        <th>Action</th>
                     </tr>
                     @foreach($tabledata as $data)
                     <tr>
-                      <td>{{$data->id}}</td>
-                      <td>{{$data->service_name}}</td>
-                      <!-- <td>{{$data->service_img}}</td> -->
-                      <td><img src="{{asset('storage/images/'.$data->service_img)}}" alt=""></td>
-                      <td>{{$data->description}}</td>
-                      <td colspan=2>
-                        <a href="{{route('service.edit',$data->id)}}">
-                            <button class="update-btn">Edit</button>
-                        </a>
-                      </td>
+                        <td>{{$data->id}}</td>
+                        <td>{{$data->service_name}}</td>
+                        <!-- <td>{{$data->service_img}}</td> -->
+                        <td><img src="{{asset('storage/images/'.$data->service_img)}}" alt=""></td>
+                        <td>{{$data->description}}</td>
+                        <td colspan=2>
+                            <a href="{{route('service.edit',$data->id)}}">
+                                <button class="update-btn">Edit</button>
+                            </a>
+                        </td>
                     </tr>
                     @endforeach
                 </table>
+            </div>
         </div>
     </div>
-</div>
-@stop
+    @stop
