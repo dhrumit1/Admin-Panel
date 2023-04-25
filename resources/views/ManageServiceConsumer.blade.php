@@ -57,6 +57,24 @@
     .update-btn {
         text-align: center;
     }
+
+    .add-button {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-inline-end: 225px;
+    }
+
+    .add-button a {
+        color: #fff;
+        background: #0A2558;
+        padding: 4px 12px;
+        font-size: 15px;
+        font-weight: 400;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
 </style>
 @section('content')
 <div class="home-content">
@@ -76,7 +94,7 @@
         <div class="recent-sales box">
             <div class="title">
                 Service Consumer :
-                <div class="button">
+                <div class="add-button">
                     <a href="/serviceConsumer/create">Add Service Consumer</a>
                 </div>
             </div>
@@ -85,7 +103,7 @@
                     <tr>
                         <th>No</th>
                         <th>FirstName</th>
-                        <th>FastName</th>
+                        <th>LastName</th>
                         <th>Gender</th>
                         <th>PhoneNo</th>
                         <th>Email</th>
@@ -96,9 +114,10 @@
                         <th>Delete</th>
                         <th>Edit</th>
                     </tr>
+                    @php($count = 1)
                     @foreach($tabledata as $data)
                     <tr>
-                        <td>{{$data->id}}</td>
+                        <td>{{$count}}</td>
                         <td>{{$data->firstName}}</td>
                         <td>{{$data->lastName}}</td>
                         <td>{{$data->gender}}</td>
@@ -121,6 +140,7 @@
                             </a>
                         </td>
                     </tr>
+                    @php($count++)
                     @endforeach
                 </table>
                 <!-- <div class="button">

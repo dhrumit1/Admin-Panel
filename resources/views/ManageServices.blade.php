@@ -1,10 +1,11 @@
 @extends('adminDashboard')
 @section('content')
 <div class="home-content">
+    <!-- <p>Services:</p> -->
     <div class="sales-boxes">
         <div class="recent-sales box">
             <div class="title">
-                Services
+                Services:
                 <!-- <div class="button">
                   <a href="/sevices/create">Add Service Consumer</a>
                 </div> -->

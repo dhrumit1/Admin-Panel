@@ -34,7 +34,7 @@ Route::get('/admindash',[loginController::class,'adminDashboardPage'])->middlewa
 Route::get('/users',[loginController::class,'UserPage']);
 // Route::get('/Consumer',[loginController::class,'ManageServiceConsumerPage']);
 // Route::get('/Provider',[loginController::class,'ManageServiceProviderPage']);
-
+Route::get('/feedback',[loginController::class,'feedBack']);
 Route::get('/add-admin',[loginController::class,'addAdmin']);
 Route::get('/logout',[loginController::class,'logoutPage']);
 
@@ -52,3 +52,5 @@ Route::resource("/serviceProvider",serviceProviderController::class);
 Route::resource("/admin",adminController::class);
 // Route::resource("/admin/store",adminController::class,'store');
 Route::resource("/service",serviceController::class);
+
+Route::get('/chart',[loginController::class,'chart']);

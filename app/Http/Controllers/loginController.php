@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Password;
 use App\Models\admin;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\feedBack;
 use Illuminate\Http\Request;
 use App\Models\serviceConsumer;
 use App\Models\serviceProvider;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -33,7 +34,7 @@ class loginController extends Controller
         // else{
         //     return redirect('/users');
         // }
-        return redirect('/')->with('error', 'Please enter the valid username and password');
+        return redirect('/')->with('error', 'Please Enter the valid username and password');
     }
 
     public function DashboardPage()
@@ -101,31 +102,64 @@ class loginController extends Controller
 
         $token = Str::random(40);
 
-        $data = ['token'=>$token];
+        $data = ['token' => $token];
         $email['to'] = $request->email;
 
-        Mail::send('mail',$data, function($message) use ($email){
+        Mail::send('mail', $data, function ($message) use ($email) {
             $message->to($email['to'])
-                    ->subject('Test email');
+                ->subject('Test email');
         });
 
         echo "ok";
     }
 
-    public function showResetForm(Request $request, $token=null)
+    public function showResetForm(Request $request, $token = null)
     {
         return view('resetPass')->with(
-        ['token' => $token, 'email' => $request->email]
+            ['token' => $token, 'email' => $request->email]
         );
     }
 
     public function updatePassword(Request $request)
     {
-         echo "oh";
+        echo "oh";
     }
 
     public function addAdmin(Request $request)
     {
         return view('Add-admin');
+    }
+
+    public function feedBack(Request $request)
+    {
+        $feedback = feedBack::all();
+        return view('feedback', ['feedback' => $feedback]);
+    }
+
+    public function chart()
+    {
+        // $feed = DB::table('feedback')
+        //     ->select('Rating', DB::raw('count(*) as total'))
+        //     ->groupBy('Rating')
+        //     ->get();
+
+        // $chartData = "";
+        // foreach ($feed as $list) {
+        //     $chartData.="['".$list->Rating."',".$list->total."],";
+        // }
+        // $arr['chartData'] = rtrim($chartData,",");
+        // return view('chart',$arr);
+        // dd($feed);
+
+        $scdata = serviceConsumer::all()->count();
+        $spdata = serviceConsumer::all()->count();
+
+        // $sc = ['service consumer',$scdata];
+        // $sp = ['service provider',$spdata];
+
+        $data = compact('scdata','spdata');
+        // echo json_encode($sc);
+        return view('chart')->with($data);
+
     }
 }

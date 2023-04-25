@@ -17,13 +17,13 @@ class CreateServiceConsumerTable extends Migration
             $table->id();
             $table->String ("firstName",50);
             $table->String ("lastName",50);
-            $table->String ("gender",7)->nullable();
+            $table->String ("gender",7)->default("-");
             $table->bigInteger ("phoneNo")->length(11);
             $table->String ("email",50);
             $table->String ("sc_password",50);
-            $table->String ("Area",100)->nullable();
-            $table->String ("City",25)->nullable();
-            $table->Integer ("pincode")->length(10)->nullable();
+            $table->String ("Area",100)->default("-");
+            $table->String ("City",25)->default("-");
+            $table->Integer ("pincode")->length(10)->default(0);
             $table->timestamps();
         });
     }

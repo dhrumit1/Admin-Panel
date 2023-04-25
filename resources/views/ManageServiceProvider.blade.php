@@ -53,6 +53,24 @@
         padding: 10px;
         border-radius: 3px 3px 3px 3px;
     }
+
+    .add-button {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-inline-end: 225px;
+    }
+
+    .add-button a {
+        color: #fff;
+        background: #0A2558;
+        padding: 4px 12px;
+        font-size: 15px;
+        font-weight: 400;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
 </style>
 @section('content')
 <div class="home-content">
@@ -73,7 +91,7 @@
         <div class="recent-sales box">
             <div class="title">
                 Service Provider :
-                <div class="button">
+                <div class="add-button">
                     <a href="/serviceProvider/create">Add Service Provider</a>
                 </div>
             </div>

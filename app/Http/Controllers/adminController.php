@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\admin;
 use App\Models\serviceConsumer;
 use App\Models\serviceProvider;
+use App\Models\feedBack;
+use Illuminate\Support\Facades\DB;
 
 class adminController extends Controller
 {
@@ -16,22 +18,34 @@ class adminController extends Controller
     {
         // return view('editProfile');
         $adminSession = session()->get('email');
-        $adminData = admin::where('Email',"=",$adminSession)->first();
+        $adminData = admin::where('Email', "=", $adminSession)->first();
         $adminName = $adminData->Name;
         $admin_id = $adminData->id;
-        session()->put('admin_id',$admin_id);
-        session()->put('Name',$adminName);
+        session()->put('admin_id', $admin_id);
+        session()->put('Name', $adminName);
 
 
         $sc = serviceConsumer::all()->count();
         $sp = serviceProvider::all()->count();
         $sum = $sc + $sp;
+        $fb = feedBack::all()->count();
 
         $lastSc = serviceConsumer::latest()->take(5)->get();
         $lastSp = serviceProvider::latest()->take(5)->get();
 
-        $data = compact('sc','sp','sum','lastSc','lastSp');
-        return view('DashBoard')->with($data);
+        $feed = DB::table('feedback')
+            ->select('Rating', DB::raw('count(*) as total'))
+            ->groupBy('Rating')
+            ->get();
+
+        $chartData = "";
+        foreach ($feed as $list) {
+            $chartData.="['".$list->Rating."',".$list->total."],";
+        }
+        $arr['chartData'] = rtrim($chartData,",");
+
+        $data = compact('sc', 'sp', 'sum', 'lastSc', 'lastSp','fb');
+        return view('DashBoard',$arr)->with($data);
     }
 
     /**
@@ -47,13 +61,26 @@ class adminController extends Controller
      */
     public function store(Request $request)
     {
-       //
+        if ($request->password == $request->confirm_password) {
+            $admin = new admin();
+            $admin->UserName = $request->input('username');
+            $admin->Name = $request->input('name');
+            $admin->Mobile_No = $request->input('phoneNo');
+            $admin->Email = $request->input('email');
+            $admin->Password = $request->input('password');
+            $admin->save();
+            return redirect()->back()->with('sucess','Sucessfully register');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Password does not match');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
         //
     }
@@ -66,7 +93,6 @@ class adminController extends Controller
         $admin = admin::find($id);
         $data = compact('admin');
         return view('editProfile')->with($data);
-
     }
 
     /**
@@ -79,11 +105,11 @@ class adminController extends Controller
         // $image->storeAs('public/images',$imageName);
 
         $admin = admin::find($id);
-        $admin -> UserName = $request["U_userName"];
-        $admin -> Name = $request["U_name"];
-        $admin -> Mobile_No = $request["U_mobileNumber"];
-        $admin -> Email = $request["U_email"];
-        $admin -> save();
+        $admin->UserName = $request["U_userName"];
+        $admin->Name = $request["U_name"];
+        $admin->Mobile_No = $request["U_mobileNumber"];
+        $admin->Email = $request["U_email"];
+        $admin->save();
         return redirect()->back();
     }
 

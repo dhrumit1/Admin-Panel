@@ -155,15 +155,28 @@
             background: #2c52ed;
         }
 
-        #close-button {
+        /* #close-button {
             position: absolute;
-            /* top: 10px;
-  right: 10px; */
+            top: 10px;
+            right: 10px;
             background-color: transparent;
             border: none;
             font-size: 25px;
             cursor: pointer;
+        } */
+        .title a
+        {
+            position: absolute;
+            right: 0px;
+            height: 25px;
+            width: 25px;
+            background-color: #2c52ed;
+            color: #fff;
+            text-align: center;
+            line-height: 25px;
+            text-decoration: none;
         }
+
 
         @media(max-width: 584px) {
             .container {
@@ -200,7 +213,9 @@
 <body>
 <!-- <button id="close-button" onclick="closeForm()">X</button> -->
     <div class="container" id="id01">
-        <div class="title">Registration</div>
+        <div class="title">Registration
+            <a href="/serviceConsumer">X</a>
+        </div>
         <div class="content">
             <form action="/serviceConsumer" method='post'>
                 @csrf

@@ -91,7 +91,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="/feedback">
                     <i class='bx bx-book-alt'></i>
                     <span class="links_name">FeedBack</span>
                 </a>

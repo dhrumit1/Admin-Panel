@@ -20,7 +20,7 @@
     }
 
     .g-4 {
-        text-align: start;
+        text-align: center;
     }
 
     .g-5 {
@@ -78,7 +78,7 @@
 
     .form-control {
         display: block;
-        width: 50%;
+        width: 30%;
         padding: 0.5rem 1rem;
         font-size: 0.9375rem;
         font-weight: 400;
@@ -95,10 +95,15 @@
         transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+        margin: auto;
     }
 
     .gap-3 {
         text-align: center;
+    }
+
+    h4{
+        margin-bottom: 50px;
     }
 </style>
 @section('content')

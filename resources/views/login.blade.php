@@ -209,10 +209,16 @@
             font-weight: bold;
         }
 
-        .text-danger
-        {
+        .text-danger {
             color: white;
             background-color: #dc3545;
+        }
+
+        .danger {
+            color: red;
+            position: absolute;
+            left: 1px;
+            top: 50px;
         }
     </style>
 </head>
@@ -225,9 +231,9 @@
         <div class="wrapper">
             <header>Login</header>
             @if(session()->has('error'))
-                <div class="text-danger">
-                    {{session()->get('error')}}
-                </div>
+            <div class="text-danger">
+                {{session()->get('error')}}
+            </div>
             @endif
             <form action="/admindash">
                 <div class="field email">
@@ -235,7 +241,7 @@
                         <input type="text" placeholder="Email Address" name="email" value="{{old('email')}}">
                         <i class="icon fas fa-envelope"></i>
                         <i class="error error-icon fas fa-exclamation-circle"></i>
-                        <sanp class="text-danger">
+                        <sanp class="danger">
                             @error('email')
                             {{$message}}
                             @enderror
@@ -248,7 +254,7 @@
                         <input type="password" placeholder="Password" name='password'>
                         <i class="icon fas fa-lock"></i>
                         <i class="error error-icon fas fa-exclamation-circle"></i>
-                        <sanp class="text-danger">
+                        <sanp class="danger">
                             @error('password')
                             {{$message}}
                             @enderror
