@@ -32,20 +32,33 @@ class adminController extends Controller
 
         $lastSc = serviceConsumer::latest()->take(5)->get();
         $lastSp = serviceProvider::latest()->take(5)->get();
-
+        // Rating chart
         $feed = DB::table('feedback')
             ->select('Rating', DB::raw('count(*) as total'))
             ->groupBy('Rating')
             ->get();
 
-        $chartData = "";
+        $chartData1 = "";
         foreach ($feed as $list) {
-            $chartData.="['".$list->Rating."',".$list->total."],";
+            $chartData1 .= "['" . $list->Rating . "'," . $list->total . "],";
         }
-        $arr['chartData'] = rtrim($chartData,",");
+        $arr1['chartData1'] = rtrim($chartData1, ",");
 
-        $data = compact('sc', 'sp', 'sum', 'lastSc', 'lastSp','fb');
-        return view('DashBoard',$arr)->with($data);
+        // gender chart
+        $feed = DB::table('service_consumer')
+            ->select('gender', DB::raw('count(*) as total'))
+            ->groupBy('gender')
+            ->get();
+
+        $chartData2 = "";
+        foreach ($feed as $list) {
+            $chartData2 .= "['" . $list->gender . "'," . $list->total . "],";
+        }
+
+        $arr2['chartData2'] = rtrim($chartData2, ",");
+
+        $data = compact('sc', 'sp', 'sum', 'lastSc', 'lastSp', 'fb');
+        return view('DashBoard', $arr1,$arr2)->with($data);
     }
 
     /**
@@ -61,6 +74,15 @@ class adminController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'username'=> 'required|string',
+            'name'=> 'required|string',
+            'phoneNo'=> 'required|numeric|min:11',
+            'email'=> 'required|email',
+            'password'=>'required',
+            'confirm_password'=>'required|same:password',
+        ]);
+
         if ($request->password == $request->confirm_password) {
             $admin = new admin();
             $admin->UserName = $request->input('username');
@@ -69,11 +91,9 @@ class adminController extends Controller
             $admin->Email = $request->input('email');
             $admin->Password = $request->input('password');
             $admin->save();
-            return redirect()->back()->with('sucess','Sucessfully register');
-        }
-        else
-        {
-            return redirect()->back()->with('error','Password does not match');
+            return redirect()->back()->with('sucess', 'Sucessfully register');
+        } else {
+            return redirect()->back()->with('error', 'Password does not match');
         }
     }
 
@@ -103,6 +123,12 @@ class adminController extends Controller
         // $image = $request->file('image');
         // $imageName = $image->getClientOriginalName();
         // $image->storeAs('public/images',$imageName);
+        $request->validate([
+            'U_userName'=> 'required|string',
+            'U_name'=> 'required|string',
+            'U_mobileNumber'=> 'required|numeric|min:11',
+            'U_email'=> 'required|email',
+        ]);
 
         $admin = admin::find($id);
         $admin->UserName = $request["U_userName"];
@@ -110,7 +136,7 @@ class adminController extends Controller
         $admin->Mobile_No = $request["U_mobileNumber"];
         $admin->Email = $request["U_email"];
         $admin->save();
-        return redirect()->back();
+        return redirect()->back()->with('sucess','Data Update Successfully');
     }
 
     /**

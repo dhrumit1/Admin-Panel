@@ -167,6 +167,11 @@
             background: #2c52ed;
         }
 
+        .text-danger
+        {
+            color: red;
+        }
+
         @media(max-width: 584px) {
             .container {
                 max-width: 100%;
@@ -211,10 +216,20 @@
                     <div class="input-box">
                         <span class="details">First Name</span>
                         <input type="text" placeholder="Enter your name" name="fnm" required>
+                        <span class="text-danger">
+                                @error('fnm')
+                                {{$message}}
+                                @enderror
+                            </span>
                     </div>
                     <div class="input-box">
                         <span class="details">Last Name</span>
                         <input type="text" placeholder="Enter your name" name="lnm" required>
+                        <span class="text-danger">
+                                @error('lnm')
+                                {{$message}}
+                                @enderror
+                            </span>
                     </div>
                     <!-- <div class="input-box">
             <span class="details">Username</span>
@@ -223,18 +238,38 @@
                     <div class="input-box">
                         <span class="details">Email</span>
                         <input type="text" placeholder="Enter your email" name="email" required>
+                        <span class="text-danger">
+                                @error('email')
+                                {{$message}}
+                                @enderror
+                            </span>
                     </div>
                     <div class="input-box">
                         <span class="details">Phone Number</span>
                         <input type="text" placeholder="Enter your number" name="phnum" required>
+                        <span class="text-danger">
+                                @error('phnum')
+                                {{$message}}
+                                @enderror
+                            </span>
                     </div>
                     <div class="input-box">
                         <span class="details">Password</span>
-                        <input type="text" placeholder="Enter your password" name="pass" required>
+                        <input type="text" placeholder="Enter your password" name="pass">
+                        <span class="text-danger">
+                                @error('pass')
+                                {{$message}}
+                                @enderror
+                            </span>
                     </div>
                     <div class="input-box">
                         <span class="details">Confirm Password</span>
-                        <input type="text" placeholder="Confirm your password" required>
+                        <input type="text" placeholder="Confirm your password" name="confirm_password">
+                        <span class="text-danger">
+                                @error('confirm_password')
+                                {{$message}}
+                                @enderror
+                            </span>
                     </div>
                 </div>
                 <div class="gender-details">
@@ -256,6 +291,11 @@
                             <span class="gender">Prefer not to say</span>
                         </label>
                     </div>
+                    <span class="text-danger">
+                                @error('uscfnm')
+                                {{$message}}
+                                @enderror
+                            </span>
                 </div>
                 <div class="button">
                     <input type="submit" value="Register">

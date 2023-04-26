@@ -164,8 +164,7 @@
             font-size: 25px;
             cursor: pointer;
         } */
-        .title a
-        {
+        .title a {
             position: absolute;
             right: 0px;
             height: 25px;
@@ -175,6 +174,11 @@
             text-align: center;
             line-height: 25px;
             text-decoration: none;
+        }
+
+        .text-danger
+        {
+            color: red;
         }
 
 
@@ -211,7 +215,7 @@
 </head>
 
 <body>
-<!-- <button id="close-button" onclick="closeForm()">X</button> -->
+    <!-- <button id="close-button" onclick="closeForm()">X</button> -->
     <div class="container" id="id01">
         <div class="title">Registration
             <a href="/serviceConsumer">X</a>
@@ -222,11 +226,21 @@
                 <div class="user-details">
                     <div class="input-box">
                         <span class="details">First Name</span>
-                        <input type="text" placeholder="Enter your name" name="fnm" required>
+                        <input type="text" placeholder="Enter your name" name="fnm">
+                        <span class="text-danger">
+                                @error('fnm')
+                                {{$message}}
+                                @enderror
+                            </span>
                     </div>
                     <div class="input-box">
                         <span class="details">Last Name</span>
-                        <input type="text" placeholder="Enter your name" name="lnm" required>
+                        <input type="text" placeholder="Enter your name" name="lnm">
+                        <span class="text-danger">
+                                @error('lnm')
+                                {{$message}}
+                                @enderror
+                            </span>
                     </div>
                     <!-- <div class="input-box">
             <span class="details">Username</span>
@@ -234,19 +248,39 @@
           </div> -->
                     <div class="input-box">
                         <span class="details">Email</span>
-                        <input type="text" placeholder="Enter your email" name="email" required>
+                        <input type="text" placeholder="Enter your email" name="email">
+                        <span class="text-danger">
+                                @error('email')
+                                {{$message}}
+                                @enderror
+                            </span>
                     </div>
                     <div class="input-box">
                         <span class="details">Phone Number</span>
-                        <input type="text" placeholder="Enter your number" name="phnum" required>
+                        <input type="text" placeholder="Enter your number" name="phnum">
+                        <span class="text-danger">
+                                @error('phnum')
+                                {{$message}}
+                                @enderror
+                            </span>
                     </div>
                     <div class="input-box">
                         <span class="details">Password</span>
-                        <input type="text" placeholder="Enter your password" name="pass" required>
+                        <input type="Password" placeholder="Enter your password" name="pass">
+                        <span class="text-danger">
+                                @error('pass')
+                                {{$message}}
+                                @enderror
+                            </span>
                     </div>
                     <div class="input-box">
                         <span class="details">Confirm Password</span>
-                        <input type="text" placeholder="Confirm your password" required>
+                        <input type="Password" placeholder="Confirm your password" name="confirm_password">
+                        <span class="text-danger">
+                                @error('confirm_password')
+                                {{$message}}
+                                @enderror
+                            </span>
                     </div>
                 </div>
                 <div class="gender-details">
@@ -268,6 +302,11 @@
                             <span class="gender">Prefer not to say</span>
                         </label>
                     </div>
+                    <span class="text-danger">
+                                @error('uscfnm')
+                                {{$message}}
+                                @enderror
+                            </span>
                 </div>
                 <div class="button">
                     <input type="submit" value="Register">
@@ -279,7 +318,8 @@
 
 <script>
     function closeForm() {
-  document.getElementById("id01").style.display = "none";
-}
+        document.getElementById("id01").style.display = "none";
+    }
 </script>
+
 </html>

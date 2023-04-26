@@ -61,6 +61,10 @@
         border-radius: 10px;
         text-align: center;
     }
+
+    .span-danger{
+        color: red;
+    }
 </style>
 @section('content')
 <div class="home-content">
@@ -78,22 +82,52 @@
             </div>
             @endif
             <label for="username">UserName:</label>
-            <input type="text" name="username" id="username" required>
+            <input type="text" name="username" id="username">
+            <span class="span-danger">
+                @error('username')
+                {{$message}}
+                @enderror
+            </span>
 
             <label for="name">Name:</label>
-            <input type="text" name="name" id="name" required>
+            <input type="text" name="name" id="name">
+            <span class="span-danger">
+                @error('name')
+                {{$message}}
+                @enderror
+            </span>
 
             <label for="phoneNo">Phone No:</label>
-            <input type="text" name="phoneNo" id="phoneNo" required>
+            <input type="text" name="phoneNo" id="phoneNo">
+            <span class="span-danger">
+                @error('phoneNo')
+                {{$message}}
+                @enderror
+            </span>
 
             <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required>
+            <input type="email" name="email" id="email">
+            <span class="span-danger">
+                @error('email')
+                {{$message}}
+                @enderror
+            </span>
 
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password" required>
+            <input type="password" name="password" id="password">
+            <span class="span-danger">
+                @error('password')
+                {{$message}}
+                @enderror
+            </span>
 
             <label for="confirm_password">Confirm Password:</label>
-            <input type="password" name="confirm_password" id="confirm_password" required>
+            <input type="password" name="confirm_password" id="confirm_password">
+            <span class="span-danger">
+                @error('confirm_password')
+                {{$message}}
+                @enderror
+            </span>
 
             <input type="submit" value="Register">
         </form>

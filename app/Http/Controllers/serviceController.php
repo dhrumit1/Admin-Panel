@@ -55,6 +55,12 @@ class serviceController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'usnm'=> 'required|string',
+            'usdes'=> 'required|string',
+            'image'=>  'required|mimes:jpeg,jpg,png,gif|required|max:10000',
+        ]);
+
         $image = $request->file('image');
         $imageName = $image->getClientOriginalName();
         $image->storeAs('public/images',$imageName);
@@ -64,7 +70,7 @@ class serviceController extends Controller
         $service -> service_img = $imageName;
         $service -> description = $request["usdes"];
         $service -> save();
-        return redirect('/service');
+        return redirect()->back()->with('sucess','Data Update Successfully');
     }
 
     /**

@@ -102,9 +102,21 @@
         text-align: center;
     }
 
-    h4{
+    h4 {
         margin-bottom: 50px;
     }
+
+    .text-danger {
+        color: red;
+    }
+
+    .text-green {
+        background-color: green;
+        color: #ffffff;
+        border-radius: 10px;
+        text-align: center;
+    }
+
 </style>
 @section('content')
 <!-- <form action="#" method="post">
@@ -146,24 +158,49 @@
                             <div class="row g-4">
                                 <h4 class="my-4">Change Details</h4>
                                 <!-- First Name -->
+                                @if(session()->has('sucess'))
+                                <div class="text-green">
+                                    {{session()->get('sucess')}}
+                                </div>
+                                @endif
                                 <div class="col-md-6">
                                     <label class="form-label">UserName *</label>
                                     <input type="text" name="U_userName" class="form-control" value='{{$admin->UserName}}'>
+                                    <span class="text-danger">
+                                        @error('U_userName')
+                                        {{$message}}
+                                        @enderror
+                                    </span>
                                 </div>
                                 <!-- Last name -->
                                 <div class="col-md-6">
                                     <label class="form-label">Name *</label>
                                     <input type="text" name="U_name" class="form-control" value='{{$admin->Name}}'>
+                                    <span class="text-danger">
+                                        @error('U_name')
+                                        {{$message}}
+                                        @enderror
+                                    </span>
                                 </div>
                                 <!-- Mobile number -->
                                 <div class="col-md-6">
                                     <label class="form-label">Mobile number *</label>
                                     <input type="text" name="U_mobileNumber" class="form-control" value='{{$admin->Mobile_No}}'>
+                                    <span class="text-danger">
+                                        @error('U_mobileNumber')
+                                        {{$message}}
+                                        @enderror
+                                    </span>
                                 </div>
                                 <!-- Email -->
                                 <div class="col-md-6">
                                     <label for="inputEmail4" class="form-label">Email *</label>
                                     <input type="email" name="U_email" class="form-control" value='{{$admin->Email}}'>
+                                    <span class="text-danger">
+                                        @error('U_email')
+                                        {{$message}}
+                                        @enderror
+                                    </span>
                                 </div>
                             </div> <!-- Row END -->
                         </div>

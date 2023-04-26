@@ -110,7 +110,8 @@ class loginController extends Controller
                 ->subject('Test email');
         });
 
-        echo "ok";
+        // echo "ok";
+        return redirect()->back()->with('send','Email has sent successfully');
     }
 
     public function showResetForm(Request $request, $token = null)
@@ -122,7 +123,14 @@ class loginController extends Controller
 
     public function updatePassword(Request $request)
     {
-        echo "oh";
+        $request->validate([
+            'email'=>'required|email',
+            'password'=>'required',
+            'confirm_password'=>'required|same:password',
+        ]);
+
+        admin::where("Email","=",$request->email)->update(["Password"=>$request->password]);
+        return redirect()->back()->with('success','password has been successfully changed');
     }
 
     public function addAdmin(Request $request)
@@ -151,15 +159,26 @@ class loginController extends Controller
         // return view('chart',$arr);
         // dd($feed);
 
-        $scdata = serviceConsumer::all()->count();
-        $spdata = serviceConsumer::all()->count();
+        // $scdata = serviceConsumer::all()->count();
+        // $spdata = serviceConsumer::all()->count();
 
         // $sc = ['service consumer',$scdata];
         // $sp = ['service provider',$spdata];
 
-        $data = compact('scdata','spdata');
-        // echo json_encode($sc);
-        return view('chart')->with($data);
+        // $data = compact('scdata','spdata');
+        // return view('chart')->with($data);
 
+        $feed = DB::table('service_consumer')
+            ->select('gender', DB::raw('count(*) as total'))
+            ->groupBy('gender')
+            ->get();
+
+        $chartData = "";
+        foreach ($feed as $list) {
+            $chartData.="['".$list->gender."',".$list->total."],";
+        }
+        $arr['chartData'] = rtrim($chartData,",");
+        return view('chart',$arr);
+        // dd($feed);
     }
 }

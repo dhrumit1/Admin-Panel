@@ -13,6 +13,17 @@
         .form-gap {
             padding-top: 70px;
         }
+
+        .send
+        {
+            background-color: green;
+            color: white;
+            border-radius: 10px;
+        }
+
+        .text-danger{
+            color: red;
+        }
     </style>
 </head>
 
@@ -37,7 +48,7 @@
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
                                             <input id="email" name="email" placeholder="email address" class="form-control" type="email">
                                             @error('email')
-                                            <span>{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     </div>
@@ -46,8 +57,13 @@
                                     </div>
 
                                     <input type="hidden" class="hide" name="token" id="token" value="">
+                                    @if(session()->has('send'))
+                                        <div class="send">
+                                            {{session()->get('send')}}
+                                        </div>
+                                    @endif
                                 </form>
-
+                                <span>Login Page?<a href="/">Login</a></span>
                             </div>
                         </div>
                     </div>

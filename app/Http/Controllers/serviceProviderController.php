@@ -38,6 +38,16 @@ class serviceProviderController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'fnm'=> 'required|string',
+            'lnm'=> 'required|string',
+            'gender'=>   'required|in:male,female,other',
+            'phnum'=> 'required|numeric|min:11',
+            'email'=> 'required|email',
+            'pass'=>'required',
+            'confirm_password'=>'required|same:pass',
+        ]);
+
         $sp = new serviceProvider();
         $sp ->firstName = $request->input('fnm');
         $sp ->lastName = $request->input('lnm');
@@ -73,6 +83,13 @@ class serviceProviderController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'uscfnm'=> 'required|string',
+            'usclnm'=> 'required|string',
+            'uscg'=>   'required|in:male,female,other',
+            'uscpn'=> 'required|numeric|min:11',
+            'usce'=> 'required|email'
+        ]);
         $serviceProvider = serviceProvider::find($id);
         $serviceProvider -> firstName = $request["uscfnm"];
         $serviceProvider -> lastName = $request["usclnm"];

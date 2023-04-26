@@ -38,6 +38,16 @@ class serviceConsumerController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'fnm'=> 'required|string',
+            'lnm'=> 'required|string',
+            'gender'=>   'required|in:male,female,other',
+            'phnum'=> 'required|numeric|min:11',
+            'email'=> 'required|email',
+            'pass'=>'required',
+            'confirm_password'=>'required|same:pass',
+        ]);
+
         $sc = new serviceConsumer();
         $sc ->firstName = $request->input('fnm');
         $sc ->lastName = $request->input('lnm');
@@ -72,6 +82,13 @@ class serviceConsumerController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'uscfnm'=> 'required|string',
+            'usclnm'=> 'required|string',
+            'uscg'=>   'required|in:male,female,other',
+            'uscpn'=> 'required|numeric|min:11',
+            'usce'=> 'required|email'
+        ]);
         $serviceConsumer = serviceConsumer::find($id);
         $serviceConsumer -> firstName = $request["uscfnm"];
         $serviceConsumer -> lastName = $request["usclnm"];
